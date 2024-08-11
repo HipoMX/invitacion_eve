@@ -68,11 +68,11 @@
             <h1 class="final-message">Nos vemos ahí</h1>
         </div>
         <!-- Contenedor de música -->
-        <audio id="backgroundMusic" loop autoplay>
+        <audio id="backgroundMusic" loop>
             <source src="musica.mp3" type="audio/mp3">
             Tu navegador no soporta la reproducción de audio.
         </audio>
-        <button id="musicButton">⏸️</button>
+        <button id="musicButton">🔊</button>
     </div>
     <div id="confettiContainer"></div>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
@@ -105,6 +105,22 @@
             valentinesCard.style.display = 'none';
             document.getElementById('inviteContainer').style.display = 'block';
             document.getElementById('inviteContainer').classList.add('fade-in');
+        });
+
+        // Control de música
+        const musicButton = document.getElementById('musicButton');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let isPlaying = false;
+
+        musicButton.addEventListener('click', function() {
+            if (isPlaying) {
+                backgroundMusic.pause();
+                musicButton.innerText = '🔊';
+            } else {
+                backgroundMusic.play();
+                musicButton.innerText = '⏸️';
+            }
+            isPlaying = !isPlaying;
         });
     });
     </script>
