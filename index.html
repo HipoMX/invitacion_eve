@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación a mi Fiesta de Graduación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="stars-wrapper">
+        <svg class="stars" width="100%" height="100%" preserveAspectRatio="none"></svg>
+        <svg class="stars" width="100%" height="100%" preserveAspectRatio="none"></svg>
+        <svg class="stars" width="100%" height="100%" preserveAspectRatio="none"></svg>
+        <!-- Generación de cometas -->
+        <svg class="extras" width="100%" height="100%" preserveAspectRatio="none">
+            <defs>
+                <radialGradient id="comet-gradient" cx="0" cy=".5" r="0.5">
+                    <stop offset="0%" stop-color="rgba(255,255,255,.8)" />
+                    <stop offset="100%" stop-color="rgba(255,255,255,0)" />
+                </radialGradient>
+            </defs>
+            <g transform="rotate(-135)">
+                <ellipse class="comet comet-a" fill="url(#comet-gradient)" cx="0" cy="0" rx="150" ry="2" />
+            </g>
+            <g transform="rotate(20)">
+                <ellipse class="comet comet-b" fill="url(#comet-gradient)" cx="100%" cy="0" rx="150" ry="2" />
+            </g>
+            <g transform="rotate(300)">
+                <ellipse class="comet comet-c" fill="url(#comet-gradient)" cx="40%" cy="100%" rx="150" ry="2" />
+            </g>
+        </svg>
+    </div>
+    <div class="container">
+        <div class="valentines">
+            <div class="envelope"></div>
+            <div class="front"></div>
+            <div class="card">
+                <div class="text">¿Esta es la ex cinepolita <br> más linda?</div>
+            </div>
+            <div class="hearts">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+                <div class="four"></div>
+                <div class="five"></div>
+            </div>
+            <div class="hint">Presiona la carta para continuar</div>
+        </div>
+        <div id="inviteContainer" style="display: none;">
+            <h1>Si es así, quiero decirle que...</h1>
+            <div id="messageContainer">
+                <div class="message visible">
+                    <p>¡Hola!, quiero invitarte a mi graduación :D 🎓</p>
+                    <img src="image1.jpg" alt="Imagen 1">
+                </div>
+            </div>
+            <button id="nextButton">Siguiente</button>
+            <div id="confirmationContainer" style="display: none;">
+                <textarea id="confirmationMessage" placeholder="Escribe tu mensaje de confirmación aquí..."></textarea>
+                <button id="confirmButton">¡Nos vemos ahí!</button>
+                <div class="hint">Envía un mensaje para confirmar tu asistencia</div>
+            </div>
+            <div id="progressBarContainer">
+                <div id="progressBar"></div>
+            </div>
+        </div>
+        <div id="finalMessageContainer" style="display: none;">
+            <h1 class="final-message">Nos vemos ahí</h1>
+        </div>
+        <!-- Contenedor de música -->
+        <audio id="backgroundMusic" loop autoplay>
+            <source src="musica.mp3" type="audio/mp3">
+            Tu navegador no soporta la reproducción de audio.
+        </audio>
+        <button id="musicButton">⏸️</button>
+    </div>
+    <div id="confettiContainer"></div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <script src="particles.js"></script>
+    <script src="script.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const svgStars = document.querySelectorAll('.stars');
+        
+        svgStars.forEach(svg => {
+            for (let i = 0; i < 200; i++) {
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("class", "star");
+                circle.setAttribute("cx", `${Math.round(Math.random() * 10000) / 100}%`);
+                circle.setAttribute("cy", `${Math.round(Math.random() * 10000) / 100}%`);
+                circle.setAttribute("r", `${Math.round((Math.random() + 0.5) * 10) / 10}`);
+                svg.appendChild(circle);
+            }
+        });
+
+        const confirmButton = document.getElementById('confirmButton');
+        confirmButton.addEventListener('click', function() {
+            document.querySelector('.container').style.display = 'none';
+            document.getElementById('finalMessageContainer').style.display = 'flex';
+            document.querySelector('.final-message').classList.add('fade-in');
+        });
+
+        const valentinesCard = document.querySelector('.valentines');
+        valentinesCard.addEventListener('click', function() {
+            valentinesCard.style.display = 'none';
+            document.getElementById('inviteContainer').style.display = 'block';
+            document.getElementById('inviteContainer').classList.add('fade-in');
+        });
+    });
+    </script>
+</body>
+</html>
